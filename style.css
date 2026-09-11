@@ -1,0 +1,357 @@
+/* ============================================
+   數學主題設計系統 (Math Theme Design System)
+   ============================================ */
+
+/* ---------- 1. 設計變數 (Design Tokens) ---------- */
+:root {
+  /* 顏色 */
+  --paper:      #fdfdf5;   /* 紙張底 */
+  --ink:        #1a1a1a;   /* 主文字 */
+  --muted:      #6b6b6b;   /* 次要文字 */
+  --accent:     #8b0000;   /* 深紅：定理、強調 */
+  --accent-2:   #1a4d8f;   /* 學術藍：定義、連結 */
+  --rule:       #d8d8c8;   /* 分隔線、表格框線 */
+  --grid-line:  rgba(120, 110, 80, 0.07);
+  --card-bg:    #ffffff;
+  --code-bg:    #f4f4ec;
+
+  /* 字體 */
+  --font-serif: "Latin Modern Roman", "STIX Two Text", "Noto Serif TC", "Times New Roman", serif;
+  --font-mono:  "Fira Code", "Consolas", "Noto Sans Mono", monospace;
+
+  /* 間距與尺寸 */
+  --content-width: 760px;
+  --radius: 6px;
+  --grid-size: 24px;
+}
+
+/* ---------- 2. 基礎重置 ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+/* ---------- 3. 全站背景與文字 ---------- */
+body {
+  font-family: var(--font-serif);
+  line-height: 1.9;
+  color: var(--ink);
+  background-color: var(--paper);
+  /* 方格紙背景 */
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  min-height: 100vh;
+  padding: 20px 20vw;
+}
+
+/* ---------- 4. 版面容器 ---------- */
+.container {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+main {
+  padding: 40px 0 80px;
+}
+
+/* ---------- 5. 標題系統 ---------- */
+h1, h2, h3, h4 {
+  line-height: 1.4;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2.2rem;
+  text-align: center;
+  border-bottom: 3px double var(--accent);
+  padding-bottom: 12px;
+  margin-bottom: 32px;
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin: 40px 0 16px;
+  padding-left: 12px;
+  border-left: 5px solid var(--accent);
+}
+
+h3 {
+  font-size: 1.25rem;
+  margin: 28px 0 12px;
+  color: var(--accent-2);
+}
+
+p {
+  margin: 12px 0;
+}
+
+/* ---------- 6. 連結 ---------- */
+a {
+  color: var(--accent-2);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+a:hover {
+  border-bottom-color: var(--accent-2);
+}
+
+/* ---------- 7. 頁頭與導覽列 ---------- */
+.site-header {
+  background: var(--ink);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.site-logo {
+  color: var(--paper);
+  font-size: 1.3rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border: none;
+}
+.site-logo::before {
+  content: "∑ ";       /* 數學符號當 logo 裝飾 */
+  color: #e8b84b;
+}
+
+.site-nav {
+  display: flex;
+  gap: 24px;
+}
+
+.site-nav a {
+  color: #d0d0c0;
+  font-size: 0.95rem;
+  border: none;
+}
+.site-nav a:hover,
+.site-nav a.active {
+  color: #ffffff;
+  border-bottom: 2px solid #e8b84b;
+}
+
+/* ---------- 8. 元件：定理 / 定義 / 證明 ---------- */
+.theorem,
+.definition,
+.lemma,
+.corollary,
+.proof,
+.example {
+  padding: 14px 18px;
+  margin: 20px 0;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  background: var(--card-bg);
+}
+
+.theorem   { border-left: 4px solid var(--accent);   background: #fdf6f6; }
+.definition{ border-left: 4px solid var(--accent-2); background: #f0f5fc; }
+.lemma     { border-left: 4px solid #2e7d32;         background: #f1f8f2; }
+.corollary { border-left: 4px solid #6a1b9a;         background: #f7f2fa; }
+.example   { border-left: 4px solid #b8860b;         background: #fdf9ef; }
+
+.proof {
+  border-left: 2px dashed var(--muted);
+  font-style: italic;
+  background: transparent;
+}
+
+.theorem::before   { content: "定理 ";   font-weight: bold; color: var(--accent); }
+.definition::before{ content: "定義 ";   font-weight: bold; color: var(--accent-2); }
+.lemma::before     { content: "引理 ";   font-weight: bold; color: #2e7d32; }
+.corollary::before { content: "推論 ";   font-weight: bold; color: #6a1b9a; }
+.example::before   { content: "例 ";     font-weight: bold; color: #b8860b; }
+.proof::before     { content: "證明. ";  font-style: normal; font-weight: bold; }
+.proof::after      { content: " ∎";      float: right; }
+
+/* ---------- 9. 公式區塊 ---------- */
+.formula {
+  text-align: center;
+  font-size: 1.3rem;
+  font-style: italic;
+  margin: 24px 0;
+  padding: 12px;
+  font-family: var(--font-serif);
+}
+
+.formula-inline {
+  font-style: italic;
+  font-family: var(--font-serif);
+}
+
+/* ---------- 10. 清單 ---------- */
+ul, ol {
+  margin: 12px 0 12px 28px;
+}
+li {
+  margin: 6px 0;
+}
+ul { list-style-type: square; }
+ol { list-style-type: decimal; }
+
+/* ---------- 11. 表格 ---------- */
+table {
+  width: 100%;              /* 佔滿容器寬度，所有表格就一樣寬 */
+  table-layout: fixed;      /* 列寬固定，不隨內容長短變動 */
+  border-collapse: collapse;
+  margin: 24px 0;
+  background: var(--card-bg);
+  font-size: 0.95rem;
+}
+th, td {
+  border: 1px solid var(--rule);
+  padding: 10px 14px;
+  text-align: left;
+  word-wrap: break-word;      /* 長字串自動換行 */
+  overflow-wrap: break-word;
+}
+th {
+  background: var(--ink);
+  color: var(--paper);
+  font-weight: bold;
+}
+
+/* ---------- 12. 程式碼 ---------- */
+code {
+  font-family: var(--font-mono);
+  background: var(--code-bg);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+pre {
+  background: var(--code-bg);
+  border-left: 4px solid var(--accent-2);
+  padding: 16px;
+  overflow-x: auto;
+  margin: 20px 0;
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+pre code {
+  background: none;
+  padding: 0;
+}
+
+/* ---------- 13. 按鈕 ---------- */
+.btn {
+  display: inline-block;
+  padding: 10px 22px;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--paper);
+  background: var(--accent-2);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+.btn:hover {
+  background: #143a6b;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--accent-2);
+  border: 2px solid var(--accent-2);
+}
+.btn-outline:hover {
+  background: var(--accent-2);
+  color: var(--paper);
+}
+
+/* ---------- 14. 分隔線 ---------- */
+hr {
+  border: none;
+  text-align: center;
+  margin: 36px 0;
+}
+hr::before {
+  content: "∗ ∗ ∗";
+  color: var(--accent);
+  letter-spacing: 12px;
+  font-size: 1.1rem;
+}
+
+/* ---------- 15. 引言 / 註解 ---------- */
+blockquote {
+  border-left: 4px solid var(--muted);
+  padding-left: 16px;
+  color: var(--muted);
+  font-style: italic;
+  margin: 20px 0;
+}
+
+.note {
+  font-size: 0.9rem;
+  color: var(--muted);
+  border-top: 1px solid var(--rule);
+  padding-top: 8px;
+  margin-top: 24px;
+}
+
+/* ---------- 16. 頁尾 ---------- */
+.site-footer {
+  background: var(--ink);
+  color: #b0b0a0;
+  padding: 30px 0;
+  margin-top: 60px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+.site-footer a {
+  color: #e8b84b;
+}
+
+/* ---------- 17. 響應式 ---------- */
+@media (max-width: 600px) {
+  html { font-size: 15px; }
+  h1   { font-size: 1.7rem; }
+  h2   { font-size: 1.35rem; }
+  .site-header .container {
+    flex-direction: column;
+    height: auto;
+    padding: 12px 20px;
+    gap: 8px;
+  }
+  .site-nav { gap: 16px; }
+  body { background-size: 20px 20px; }
+    table {
+    font-size: 0.85rem;   /* 縮小字級，讓欄位好讀一點 */
+  }
+  th, td {
+    padding: 8px 10px;
+    }
+}
+/* ----------- 18. 鏈結 ---------*/
+
+.page-links {
+  display: flex;
+  text-decoration: underline;
+  flex-wrap: wrap;      /* 空間不夠時自動換行 */
+  gap: 16px 24px;       /* 上下 16px、左右 24px */
+  justify-content: center;
+  margin: 32px 0;
+}

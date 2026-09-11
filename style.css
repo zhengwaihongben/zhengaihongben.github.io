@@ -355,3 +355,11 @@ blockquote {
   justify-content: center;
   margin: 32px 0;
 }
+
+/* ---------- 19.Photos ------------*/
+img {
+  display: block;      /* 讓圖片變成區塊元素 */
+  margin: 0 auto;      /* 左右自動，達到水平置中 */
+  max-width: 100%;     /* 圖片最寬不超過容器 */
+  height: auto;        /* 保持等比例，不變形 */
+}

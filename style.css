@@ -51,7 +51,7 @@ body {
     linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: var(--grid-size) var(--grid-size);
   min-height: 100vh;
-  padding: 20px 20vw;
+  padding: 20px 25vw;
 }
 
 /* ---------- 4. 版面容器 ---------- */

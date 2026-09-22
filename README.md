@@ -2,4 +2,4 @@
 
 **Email:** waihongzhg@gmail.com
 
-This website is still under construction.
+This website is still under construction, and I used AI to help me.

@@ -363,3 +363,19 @@ img {
   max-width: 100%;     /* 圖片最寬不超過容器 */
   height: auto;        /* 保持等比例，不變形 */
 }
+
+/* 置中並列 */
+.img-row {
+  display: flex;              /* 讓子元素橫向排列 */
+  justify-content: center;    /* 整組置中 */
+  gap: 5px;                  /* 圖片之間的間距 */
+  margin: 24px 0;
+}
+
+.img-row img {
+  display: block;             /* 覆蓋全域的 display: block */
+  margin: 0;                  /* 覆蓋全域的 margin: 0 auto */
+  width: 30%;                 /* 每張圖佔容器 30%，三張共 90% + 間距 */
+  height: auto;               /* 保持等比例，不變形 */
+  object-fit: cover;
+}

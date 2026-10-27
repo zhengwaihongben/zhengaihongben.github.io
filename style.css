@@ -78,6 +78,7 @@ h1 {
   border-bottom: 3px double var(--accent);
   padding-bottom: 12px;
   margin-bottom: 32px;
+  margin-top: 40px;
 }
 
 h2 {
@@ -117,11 +118,14 @@ a:hover {
   z-index: 100;
 }
 
-.site-header .container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 60px;
+.site-header {
+  background-color: rgba(253, 253, 245, 0.9); /* 使用紙張底色，並加入 90% 透明度 */
+  backdrop-filter: blur(4px); /* 加上毛玻璃效果，滑動時更有質感 */
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid var(--rule); /* 加一條淡色分隔線 */
 }
 
 .site-logo {
@@ -345,16 +349,31 @@ blockquote {
     padding: 8px 10px;
     }
 }
-/* ----------- 18. 鏈結 ---------*/
 
+/* ----------- 18. 鏈結 ---------*/
 .page-links {
   display: flex;
-  text-decoration: underline;
-  flex-wrap: wrap;      /* 空間不夠時自動換行 */
-  gap: 16px 24px;       /* 上下 16px、左右 24px */
+  flex-wrap: wrap;      
+  gap: 16px 24px;       
   justify-content: center;
   margin: 32px 0;
 }
+
+/* 針對裡面的連結做美化 */
+.page-links a {
+  color: var(--accent-2);       /* 預設學術藍 */
+  text-decoration: none;        
+  border-bottom: 2px solid transparent; 
+  transition: border-color 0.2s ease, color 0.2s ease;
+  font-weight: bold;            /* 建議加粗，讓導覽列更醒目 */
+}
+
+/* 滑鼠移過去才顯示底線 */
+.page-links a:hover {
+  color: var(--accent);         /* 深紅色 */
+  border-bottom-color: var(--accent);
+}
+
 
 /* ---------- 19.Photos ------------*/
 img {
